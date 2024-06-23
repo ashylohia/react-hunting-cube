@@ -12,7 +12,7 @@ import RandomMeal from "./pages/RandomMeal.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <BrowserRouter basename="/">
+    <BrowserRouter basename="/react-hunting-cube/">
       <Routes>
         <Route path="/" element={<App />}>
           <Route index element={<Home />} />
