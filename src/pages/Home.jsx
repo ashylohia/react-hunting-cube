@@ -30,7 +30,7 @@ const Home = () => {
           </Link>
         </Grid>
         <Grid item md={3} xs={8}>
-          <Link to={"/favourites"}>
+          <Link to={"/favorites"}>
             <img src="/react-hunting-cube/favorites.jpg" width="100%" />
           </Link>
         </Grid>

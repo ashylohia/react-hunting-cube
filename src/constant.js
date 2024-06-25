@@ -9,8 +9,8 @@ export const drawerItems = [
     path: "/menu",
   },
   {
-    label: "My Favourites",
-    path: "favourites",
+    label: "My Favorites",
+    path: "favorites",
   },
   {
     label: "Meal Generator",

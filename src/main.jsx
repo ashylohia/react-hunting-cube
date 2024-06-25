@@ -20,7 +20,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
           <Route path="/about" element={<About />} />
           <Route path="/menu" element={<Menu />} />
           <Route path="/category/:categoryName" element={<Category />} />
-          <Route path="/favourites" element={<Favorites />} />
+          <Route path="/favorites" element={<Favorites />} />
           <Route path="/random-meal-generator" element={<RandomMeal />} />
           <Route path="*" element={<NotFound />} />
         </Route>
