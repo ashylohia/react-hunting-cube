@@ -1,7 +1,8 @@
 import { useContext } from "react";
-import { Typography, Box } from "@mui/material";
+import { Typography, Box, Button } from "@mui/material";
 import CardGallery from "../components/CardGallery";
 import { AppContext } from "../context";
+import NoMealFound from "../components/NoMealFound";
 
 const Favorites = () => {
   const { favoriteMealsContext } = useContext(AppContext);
@@ -9,13 +10,24 @@ const Favorites = () => {
     <Box sx={{ p: 3 }}>
       <Typography
         variant="h1"
-        color="text.secondary"
-        sx={{ fontSize: "2.5rem", mb: 2 }}
+        sx={{
+          fontSize: "2.5rem",
+          mb: 6,
+          mt: 2,
+          color: "#FA4A0C",
+          fontFamily: "Playfair Display, serif",
+          fontStyle: "italic",
+          fontWeight: "600",
+        }}
       >
-        Favorites Meal
+        My Favorites
       </Typography>
 
-      <CardGallery meals={favoriteMealsContext} />
+      {favoriteMealsContext.length > 0 ? (
+        <CardGallery meals={favoriteMealsContext} />
+      ) : (
+        <NoMealFound />
+      )}
     </Box>
   );
 };

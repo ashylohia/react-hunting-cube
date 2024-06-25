@@ -10,12 +10,14 @@ import {
 import useMediaQuery from "@mui/material/useMediaQuery";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import { AppContext } from "../context";
+import RenderSkeletons from "./RenderSkeleton";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 
 const CardGallery = (props) => {
   const { favoriteMealsContext, setFavoriteMealsContext } =
     useContext(AppContext);
 
-  const { meals, isRandomMeal } = props;
+  const { meals, isRandomMeal, loading } = props;
   const isMobile = useMediaQuery("(max-width:600px)");
 
   const cardHandler = (mealId) => {
@@ -26,7 +28,7 @@ const CardGallery = (props) => {
     );
 
     if (isMealAlreadySelected < 0) {
-      const selectedMeal = meals.find((item) => item.idMeal == mealId);
+      const selectedMeal = meals.find((item) => item.idMeal === mealId);
       modifyFavoriteMeals.push(selectedMeal);
     } else {
       modifyFavoriteMeals.splice(isMealAlreadySelected, 1);
@@ -35,28 +37,35 @@ const CardGallery = (props) => {
     setFavoriteMealsContext(modifyFavoriteMeals);
   };
 
-  console.log(isMobile);
-
   const isMealSelected = useCallback(
     (mealId) => {
       return (
-        favoriteMealsContext.find((item) => item.idMeal == mealId) ?? false
+        favoriteMealsContext.find((item) => item.idMeal === mealId) ?? false
       );
     },
     [favoriteMealsContext]
   );
 
   return (
-    <Grid container spacing={3}>
-      {meals.length > 0 &&
-        meals.map((mealItem) => (
+    <Grid container spacing={5}>
+      {loading ? (
+        <RenderSkeletons isRandomMeal={isRandomMeal} />
+      ) : (
+        meals?.map((mealItem) => (
           <Grid
             item
             md={isRandomMeal ? 12 : 3}
             key={`${mealItem.idMeal}_id`}
             xs={12}
           >
-            <Card onClick={() => cardHandler(mealItem.idMeal)}>
+            <Card
+              onClick={() => cardHandler(mealItem.idMeal)}
+              elevation={3}
+              sx={{
+                boxShadow: "rgba(149, 157, 165, 0.2) 0px 8px 24px",
+                cursor: "pointer",
+              }}
+            >
               <CardMedia
                 component="img"
                 height={isMobile ? "200" : isRandomMeal ? "400" : "194"}
@@ -74,17 +83,23 @@ const CardGallery = (props) => {
                   aria-label="add to favorites"
                   sx={{ outline: "none !important" }}
                 >
-                  <FavoriteIcon
-                    sx={{
-                      color: isMealSelected(mealItem.idMeal) ? "red" : "grey",
-                    }}
-                  />
+                  {isMealSelected(mealItem.idMeal) ? (
+                    <FavoriteIcon
+                      sx={{
+                        color: "red",
+                      }}
+                    />
+                  ) : (
+                    <FavoriteBorderIcon />
+                  )}
                 </IconButton>
                 <Typography
+                  noWrap
                   variant="body2"
                   color="text.secondary"
                   ml={1}
                   sx={{
+                    fontFamily: "Rubik, sans-serif",
                     fontSize: isMobile
                       ? "1rem"
                       : isRandomMeal
@@ -97,7 +112,8 @@ const CardGallery = (props) => {
               </CardContent>
             </Card>
           </Grid>
-        ))}
+        ))
+      )}
     </Grid>
   );
 };

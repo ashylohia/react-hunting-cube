@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { Typography, Grid } from "@mui/material";
 import CardGallery from "../components/CardGallery";
 import { AppContext } from "../context";
+import NoMealFound from "../components/NoMealFound";
 
 const About = () => {
   const { favoriteMealsContext } = useContext(AppContext);
@@ -11,8 +12,15 @@ const About = () => {
       <Grid item md={12}>
         <Typography
           variant="h1"
-          color="text.secondary"
-          sx={{ fontSize: "2.5rem", mb: 2 }}
+          sx={{
+            fontSize: "2.5rem",
+            mb: 6,
+            mt: 2,
+            color: "#FA4A0C",
+            fontFamily: "Playfair Display, serif",
+            fontStyle: "italic",
+            fontWeight: "600",
+          }}
         >
           About Me
         </Typography>
@@ -20,7 +28,7 @@ const About = () => {
         <Typography
           variant="body2"
           color="text.secondary"
-          sx={{ fontSize: "1.2rem", mb: 2 }}
+          sx={{ fontSize: "1.2rem", mb: 2, fontFamily: "Rubik, sans-serif" }}
         >
           Contrary to popular belief, Lorem Ipsum is not simply random text. It
           has roots in a piece of classical Latin literature from 45 BC, making
@@ -37,16 +45,27 @@ const About = () => {
         </Typography>
       </Grid>
 
-      <Grid item md={12} mt={3}>
+      <Grid item md={12} mt={3} xs={12}>
         <Typography
           variant="h1"
-          color="text.secondary"
-          sx={{ fontSize: "2.5rem", mb: 2 }}
+          sx={{
+            fontSize: "2.5rem",
+            mb: 6,
+            mt: 2,
+            color: "#FA4A0C",
+            fontFamily: "Playfair Display, serif",
+            fontStyle: "italic",
+            fontWeight: "600",
+          }}
         >
-          Favorites
+          My Favorites
         </Typography>
 
-        <CardGallery meals={favoriteMealsContext} />
+        {favoriteMealsContext.length > 0 ? (
+          <CardGallery meals={favoriteMealsContext} />
+        ) : (
+          <NoMealFound />
+        )}
       </Grid>
     </Grid>
   );

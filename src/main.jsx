@@ -9,6 +9,7 @@ import Home from "./pages/Home";
 import About from "./pages/About.jsx";
 import Menu from "./pages/Menu.jsx";
 import RandomMeal from "./pages/RandomMeal.jsx";
+import NotFound from "./pages/NotFound.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
@@ -21,6 +22,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
           <Route path="/category/:categoryName" element={<Category />} />
           <Route path="/favourites" element={<Favorites />} />
           <Route path="/random-meal-generator" element={<RandomMeal />} />
+          <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>
     </BrowserRouter>
